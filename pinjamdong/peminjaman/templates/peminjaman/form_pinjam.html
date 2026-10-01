@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Peminjaman Lab</title>
+</head>
+<body>
+    <h2>{% if object %}Edit Peminjaman / Centang Pengembalian{% else %}Pinjam Barang Baru{% endif %}</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit">Simpan Data</button>
+    </form>
+    
+    <br>
+    <a href="{% url 'daftar_pinjam' %}">⬅️ Kembali ke Daftar</a>
+</body>
+</html>

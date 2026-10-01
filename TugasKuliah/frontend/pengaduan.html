@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Pengaduan Warga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="h4 mb-0">Daftar Pengaduan Warga</h1>
+            <div>
+                <button id="add-pengaduan-btn" class="btn btn-sm btn-primary me-2">Tambah Data</button>
+                <small class="text-muted">Sumber: API lokal</small>
+            </div>
+        </div>
+
+        <div id="pengaduan-list-container">
+            <div class="d-flex justify-content-center my-5">
+                <div class="spinner-border" role="status"><span class="visually-hidden">Memuat...</span></div>
+            </div>
+        </div>
+    </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="aduan.js"></script>
+
+        <!-- Modal for Add/Edit Pengaduan -->
+        <div class="modal fade" id="pengaduanModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pengaduanModalLabel">Tambah / Edit Pengaduan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="pengaduan-form">
+                            <input type="hidden" id="pengaduan-id">
+                            <div class="mb-3">
+                                <label for="pengaduan-judul" class="form-label">Judul</label>
+                                <input id="pengaduan-judul" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pengaduan-deskripsi" class="form-label">Deskripsi</label>
+                                <textarea id="pengaduan-deskripsi" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pengaduan-status" class="form-label">Status</label>
+                                <select id="pengaduan-status" class="form-control">
+                                    <option value="BARU">Baru</option>
+                                    <option value="DIPROSES">Diproses</option>
+                                    <option value="SELESAI">Selesai</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pengaduan-pelapor" class="form-label">Pelapor</label>
+                                <select id="pengaduan-pelapor" class="form-control">
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" id="pengaduan-save-btn" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Delete confirmation -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <p class="mb-3">Yakin ingin menghapus data ini?</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" id="confirm-delete-btn" class="btn btn-danger btn-sm">Hapus</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

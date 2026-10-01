@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konfirmasi Hapus Data</title>
+</head>
+<body>
+    <h2>Konfirmasi Penghapusan</h2>
+    <p>Apakah Anda yakin ingin menghapus data peminjaman barang <strong>{{ object.barang_dipinjam }}</strong> oleh <strong>{{ object.nama_peminjam }}</strong>?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Ya, Hapus Permanen!</button>
+    </form>
+    
+    <br>
+    <a href="{% url 'daftar_pinjam' %}">⬅️ Batal & Kembali</a>
+</body>
+</html>

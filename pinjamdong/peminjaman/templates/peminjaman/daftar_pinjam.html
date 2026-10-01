@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistem Peminjaman Lab</title>
+</head>
+<body>
+    <h2>Daftar Peminjaman Barang Aslab</h2>
+    <a href="{% url 'tambah_pinjam' %}"><button>+ Pinjam Barang</button></a>
+    <br><br>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Peminjam</th>
+                <th>Barang</th>
+                <th>Tgl Pinjam</th>
+                <th>Tgl Kembali</th>
+                <th>Status / TTD Petugas</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pinjam in data_pinjam %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ pinjam.nama_peminjam }}</td>
+                <td>{{ pinjam.barang_dipinjam }}</td>
+                <td>{{ pinjam.tanggal_pinjam }}</td>
+                <td>{{ pinjam.tanggal_kembali|default_if_none:"-" }}</td>
+                <td>
+                    {% if pinjam.status_dikembalikan %}
+                        ✅ Selesai
+                    {% else %}
+                        ❌ Belum Kembali
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_pinjam' pinjam.id %}">Edit/Centang</a> |
+                    <a href="{% url 'hapus_pinjam' pinjam.id %}">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

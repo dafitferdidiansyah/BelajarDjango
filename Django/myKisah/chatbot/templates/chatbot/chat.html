@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyKisah Mommy Chat</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #f4f4f9; }
+        .chatbox { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .user { background-color: #e1f5fe; text-align: right; margin-left: 50px; }
+        .mommy { background-color: #fce4ec; margin-right: 50px; }
+        h1 { color: #333; }
+        form { margin-top: 20px; }
+        textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background-color: #d12267; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>MyKisah Chatbot ala Mommy</h1>
+    <hr>
+
+    <div id="conversation">
+        {% for message in history %}
+            {% if message.role == 'user' %}
+                <div class="chatbox user">
+                    <p><strong>Kamu:</strong><br>{{ message.text }}</p>
+                </div>
+            {% else %}
+                <div class="chatbox mommy">
+                    <p><strong>Mommy:</strong><br>{{ message.text|linebreaks }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="prompt" cols="60" rows="3" placeholder="Ceritakan apa saja..."></textarea>
+        <br><br>
+        <button type="submit">Kirim</button>
+    </form>
+</body>
+</html>
